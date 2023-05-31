@@ -21,20 +21,24 @@ public class Student
         super( id, name, email, birthDate );
     }
 
-    public void enrollToCourse( Course course )
-    {
-        //TODO implement this method
+    public void enrollToCourse( Course course ) {
+        if (!isAttendingCourse(course.getCode())) {
+            courses.add(course);
+        }
     }
-
     public void registerApprovedCourse( Course course )
     {
         approvedCourses.put( course.getCode(), course );
     }
 
 
-    public boolean isAttendingCourse( String courseCode )
-    {
-        //TODO implement this method
+    public boolean isAttendingCourse( String courseCode ) {
+        for(Course course : courses) {
+            if (course.getCode().equals(courseCode)) {
+                System.out.println("Error! Student is already enrolled in course " + courseCode + "!");
+                return true;
+            }
+        }
         return false;
     }
 
@@ -47,6 +51,6 @@ public class Student
     @Override
     public String toString()
     {
-        return "Student {" + super.toString() + "}";
+        return "Student {" + super.toString() + ", " + courses + "}";
     }
 }
